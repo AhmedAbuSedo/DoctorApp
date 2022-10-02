@@ -1,31 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
 import { TextInput, View, Text, StyleSheet } from "react-native";
 
-const TextField = ({ title, placeHolder, isSecureTextEntry }) => {
+const TextField = ({
+  title,
+  placeHolder,
+  isSecureTextEntry,
+  eyes,
+  value,
+  onChangvalue,
+  Type,
+}) => {
   return (
     <View style={styles.inputContainer}>
       <Text style={styles.lable}>{title}</Text>
-      <TextInput
-        style={styles.txtInput}
-        placeholder={placeHolder}
-        secureTextEntry={isSecureTextEntry}
-      />
+      <View style={styles.txtView}>
+        <TextInput
+          style={styles.txtInput}
+          value={value}
+          keyboardType={Type || "default"}
+          onChangeText={onChangvalue}
+          placeholder={placeHolder}
+          secureTextEntry={isSecureTextEntry}
+        />
+        {eyes}
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   inputContainer: {
-    alignSelf: "center",
-    backgroundColor: "blue",
+    width: "90%",
+    marginHorizontal: 18,
+    marginBottom: 20,
   },
   lable: {
     fontSize: 20,
     fontWeight: "bold",
-    backgroundColor: "red",
+    marginHorizontal: 4,
+  },
+  txtView: {
+    paddingHorizontal: 11,
+    flexDirection: "row",
+    borderWidth: 1,
+    borderRadius: 12,
+    paddingHorizontal: 11,
+    height: 44,
+    width: 339,
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   txtInput: {
-    backgroundColor: "green",
+    width: 250,
+    height: 24,
   },
 });
 export default TextField;
