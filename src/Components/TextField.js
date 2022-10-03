@@ -7,8 +7,9 @@ const TextField = ({
   isSecureTextEntry,
   eyes,
   value,
-  onChangvalue,
+  onChangval,
   Type,
+  onblur,
 }) => {
   return (
     <View style={styles.inputContainer}>
@@ -18,9 +19,10 @@ const TextField = ({
           style={styles.txtInput}
           value={value}
           keyboardType={Type || "default"}
-          onChangeText={onChangvalue}
+          onChangeText={onChangval}
           placeholder={placeHolder}
           secureTextEntry={isSecureTextEntry}
+          onBlur={onblur}
         />
         {eyes}
       </View>

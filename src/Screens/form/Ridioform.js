@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
   KeyboardAvoidingView,
+  RefreshControl,
 } from "react-native";
 import Radio from "../../Components/RadioComponent";
 import Question from "../../Components/question";
@@ -14,6 +15,13 @@ const Raidioform = () => {
   const [Q1, SetQ1] = useState("");
   const [Q2, SetQ2] = useState("");
   const [Q3, SetQ3] = useState("");
+  const [refreshing, setRefresh] = useState(false);
+  const onRefresh = () => {
+    setRefresh(true);
+    setTimeout(() => {
+      setRefresh(false);
+    }, 2000);
+  };
   return (
     <View style={styles.view}>
       <StatusBar barStyle="auto" />
@@ -31,7 +39,14 @@ const Raidioform = () => {
       </View>
       <View style={styles.lineSparetor}></View>
 
-      <ScrollView>
+      <ScrollView
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing} //status of refresh, in the first refresh off(false)
+            onRefresh={onRefresh} //on refresh call function
+          />
+        }
+      >
         <KeyboardAvoidingView>
           <>
             <View style={{ marginBottom: 24 }}>
