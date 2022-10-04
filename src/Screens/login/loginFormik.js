@@ -34,14 +34,25 @@ const LoginForm = () => {
       <View style={styles.container}>
         <Formik
           initialValues={{ email: "", password: "" }} //different field of form and initial value for this
-          onSubmit={(values, actions) => {
-            actions.resetForm();
+          onSubmit={(values, { ...rest }) => {
+            setTimeout(() => {
+              rest.setSubmitting(false);
+              rest.resetForm();
+            }, 2000);
             console.log(values);
           }} //run on submit form =>values represent to the different value in side the different filed
           validationSchema={SignupSchema}
         >
           {(
-            { handleChange, handleBlur, handleSubmit, values, errors, touched } //function return some jsx code the function props provide automatically by formik
+            {
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              values,
+              errors,
+              touched,
+              isSubmitting,
+            } //function return some jsx code the function props provide automatically by formik
           ) => (
             <View>
               <TextField
@@ -84,7 +95,11 @@ const LoginForm = () => {
                   {errors.password}
                 </Text>
               )}
-              <Button title="Submit" onPress={handleSubmit} />
+              <Button
+                title="Submit"
+                onPress={handleSubmit}
+                disabled={isSubmitting}
+              />
               {/* handlesubmit run code in onsubmit */}
             </View>
           )}
